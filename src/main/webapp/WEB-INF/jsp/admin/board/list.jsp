@@ -3,7 +3,37 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://egovframework.gov/ctl/ui" prefix="ui" %>
 <%@ include file="../include/header.jsp" %>
+<script type="text/javascript">
+//아래 html주석은 자바스크립트 지원하지 않는 브라우저에서 에러상황을 피하기 위해서 사용했던 방식.
+/*
+ 자바스크립트 여러줄 주석
+ */
+<!--
+    function press(event) {
+        if (event.keyCode==13) {
+            fn_egov_select_noticeList('1');
+        }
+    }
 
+    function fn_egov_addNotice() {
+        document.frm.action = "/sht_webapp/cop/bbs/addBoardArticle.do";
+        document.frm.submit();
+    }
+    
+    function fn_egov_select_noticeList(pageNo) {
+        document.frm.pageIndex.value = pageNo;
+        document.frm.action = "<c:url value='/admin/board/selectBoard.do'/>";
+        document.frm.submit();  
+    }
+    
+    function fn_egov_inqire_notice(nttId, bbsId) {
+        document.subForm.nttId.value = nttId;
+        document.subForm.bbsId.value = bbsId;
+        document.subForm.action = "/sht_webapp/cop/bbs/selectBoardArticle.do";
+        document.subForm.submit();          
+    }
+//-->
+</script>
 <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
@@ -16,7 +46,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">${bdMstr.bbsNm} Page</li>
+              <li class="breadcrumb-item active">${brdMstrVO.bbsNm} Page</li>
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
